@@ -1,5 +1,5 @@
 {
-  "name": "@azure/arm-costmanagement",
+  "name": "@lvfs/arm-costmanagement",
   "author": "Microsoft Corporation",
   "description": "CostManagementClient Library with typescript type definitions for node.js and browser.",
   "version": "1.0.0",
@@ -48,6 +48,9 @@
     "rollup.config.js",
     "tsconfig.json"
   ],
+  "publishConfig": {
+    "access": "restricted"
+  },
   "scripts": {
     "build": "tsc && rollup -c rollup.config.js && npm run minify",
     "minify": "uglifyjs -c -m --comments --source-map \"content='./dist/arm-costmanagement.js.map'\" -o ./dist/arm-costmanagement.min.js ./dist/arm-costmanagement.js",
