@@ -1187,71 +1187,6 @@ export const QueryColumn: msRest.CompositeMapper = {
   }
 };
 
-export const QueryResult: msRest.CompositeMapper = {
-  serializedName: "QueryResult",
-  type: {
-    name: "Composite",
-    className: "QueryResult",
-    modelProperties: {
-      ...Resource.type.modelProperties,
-      eTag: {
-        serializedName: "eTag",
-        type: {
-          name: "String"
-        }
-      },
-      location: {
-        readOnly: true,
-        serializedName: "location",
-        type: {
-          name: "String"
-        }
-      },
-      sku: {
-        readOnly: true,
-        serializedName: "sku",
-        type: {
-          name: "String"
-        }
-      },
-      nextLink: {
-        serializedName: "properties.nextLink",
-        type: {
-          name: "String"
-        }
-      },
-      columns: {
-        serializedName: "properties.columns",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "QueryColumn"
-            }
-          }
-        }
-      },
-      rows: {
-        serializedName: "properties.rows",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Sequence",
-              element: {
-                type: {
-                  name: "Object"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const OperationDisplay: msRest.CompositeMapper = {
   serializedName: "Operation_display",
   type: {
@@ -2126,6 +2061,71 @@ export const DimensionsListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "Dimension"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const QueryResult: msRest.CompositeMapper = {
+  serializedName: "QueryResult",
+  type: {
+    name: "Composite",
+    className: "QueryResult",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      eTag: {
+        serializedName: "eTag",
+        type: {
+          name: "String"
+        }
+      },
+      location: {
+        readOnly: true,
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      sku: {
+        readOnly: true,
+        serializedName: "sku",
+        type: {
+          name: "String"
+        }
+      },
+      nextLink: {
+        serializedName: "properties.nextLink",
+        type: {
+          name: "String"
+        }
+      },
+      columns: {
+        serializedName: "properties.columns",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "QueryColumn"
+            }
+          }
+        }
+      },
+      rows: {
+        serializedName: "properties.rows",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Sequence",
+              element: {
+                type: {
+                  name: "Object"
+                }
+              }
             }
           }
         }

@@ -713,39 +713,6 @@ export interface QueryColumn {
 }
 
 /**
- * Result of query. It contains all columns listed under groupings and aggregation.
- */
-export interface QueryResult extends Resource {
-  /**
-   * eTag of the resource. To handle concurrent update scenario, this field will be used to
-   * determine whether the user is updating the latest version or not.
-   */
-  eTag?: string;
-  /**
-   * Resource location
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly location?: string;
-  /**
-   * Resource SKU
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly sku?: string;
-  /**
-   * The link (url) to the next page of results.
-   */
-  nextLink?: string;
-  /**
-   * Array of columns
-   */
-  columns?: QueryColumn[];
-  /**
-   * Array of rows
-   */
-  rows?: any[][];
-}
-
-/**
  * The object that represents the operation.
  */
 export interface OperationDisplay {
@@ -1320,6 +1287,41 @@ export interface ViewListResult extends Array<View> {
  * @extends Array<Dimension>
  */
 export interface DimensionsListResult extends Array<Dimension> {
+}
+
+/**
+ * @interface
+ * Result of query. It contains all columns listed under groupings and aggregation.
+ * @extends Array<QueryColumn>, Resource
+ */
+export interface QueryResult extends Array<QueryColumn>, Resource {
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to
+   * determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
+  /**
+   * Resource location
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly location?: string;
+  /**
+   * Resource SKU
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly sku?: string;
+  /**
+   * The link (url) to the next page of results.
+   */
+  nextLink?: string;
+  /**
+   * Array of columns
+   */
+  columns?: QueryColumn[];
+  /**
+   * Array of rows
+   */
+  rows?: any[][];
 }
 
 /**
@@ -2026,6 +2028,26 @@ export type QueryUsageResponse = QueryResult & {
  * Contains response data for the usageByExternalCloudProviderType operation.
  */
 export type QueryUsageByExternalCloudProviderTypeResponse = QueryResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: QueryResult;
+    };
+};
+
+/**
+ * Contains response data for the usageNext operation.
+ */
+export type QueryUsageNextResponse = QueryResult & {
   /**
    * The underlying HTTP response.
    */

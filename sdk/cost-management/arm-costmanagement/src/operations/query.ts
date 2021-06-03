@@ -149,6 +149,38 @@ export class Query {
       usageByExternalCloudProviderTypeOperationSpec,
       callback) as Promise<Models.QueryUsageByExternalCloudProviderTypeResponse>;
   }
+
+  /**
+   * Query the usage data for scope defined.
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param parameters Parameters supplied to the CreateOrUpdate Query Config operation.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.QueryUsageNextResponse>
+   */
+  usageNext(nextPageLink: string, parameters: Models.QueryDefinition, options?: msRest.RequestOptionsBase): Promise<Models.QueryUsageNextResponse>;
+  /**
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param parameters Parameters supplied to the CreateOrUpdate Query Config operation.
+   * @param callback The callback
+   */
+  usageNext(nextPageLink: string, parameters: Models.QueryDefinition, callback: msRest.ServiceCallback<Models.QueryResult>): void;
+  /**
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param parameters Parameters supplied to the CreateOrUpdate Query Config operation.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  usageNext(nextPageLink: string, parameters: Models.QueryDefinition, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.QueryResult>): void;
+  usageNext(nextPageLink: string, parameters: Models.QueryDefinition, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.QueryResult>, callback?: msRest.ServiceCallback<Models.QueryResult>): Promise<Models.QueryUsageNextResponse> {
+    return this.client.sendOperationRequest(
+      {
+        nextPageLink,
+        parameters,
+        options
+      },
+      usageNextOperationSpec,
+      callback) as Promise<Models.QueryUsageNextResponse>;
+  }
 }
 
 // Operation Specifications
@@ -208,6 +240,38 @@ const usageByExternalCloudProviderTypeOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.QueryResult
     },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const usageNextOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  baseUrl: "https://management.azure.com",
+  path: "{nextLink}",
+  urlParameters: [
+    Parameters.nextPageLink
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.QueryDefinition,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.QueryResult
+    },
+    204: {},
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
